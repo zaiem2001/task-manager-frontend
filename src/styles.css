@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+:root {
+  --primary-color: #6b4e71;
+  --primary-header-size: 24px;
+  --primary-text-weight: 700;
+}

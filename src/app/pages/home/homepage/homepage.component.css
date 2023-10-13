@@ -1,0 +1,145 @@
+.task-wrapper::-webkit-scrollbar,
+.list-items::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.task-wrapper,
+.list-items {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #020202;
+}
+
+.wrapper {
+  width: 70%;
+  height: 70%;
+  box-shadow: 0px 0px 4px 0px #fff;
+
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+}
+
+.lists-container {
+  flex: 0.5;
+  background-color: #f1f2eb;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: space-between;
+}
+
+.top-part h3 {
+  font-size: var(--primary-header-size);
+  font-weight: var(--primary-text-weight);
+  color: var(--primary-color);
+}
+
+.top-part {
+  max-height: 90%;
+}
+
+.list-items {
+  overflow: auto;
+  max-height: 90%;
+  padding: 1rem 0;
+}
+
+.new-list-btn {
+  width: 45%;
+  padding: 0.5rem;
+
+  border: none;
+  background-color: var(--primary-color);
+  font-family: inherit;
+  color: white;
+  cursor: pointer;
+  transition: all ease-in-out 100ms;
+}
+
+.new-list-btn:hover {
+  transform: scale(0.95);
+}
+
+.new-list-btn:active {
+  transform: scale(0.9);
+}
+
+.tasks-container {
+  flex: 1;
+  background-color: #d7e8ba;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-header h3 {
+  font-size: var(--primary-header-size);
+  font-weight: var(--primary-text-weight);
+  color: var(--primary-color);
+}
+
+.task-header span {
+  padding: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all ease-in-out 100ms;
+}
+
+.settings-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-header span:hover {
+  transform: scale(0.95);
+}
+
+.task-wrapper {
+  padding: 0.25rem 0;
+  overflow: auto;
+}
+
+.add-task {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+
+  width: 40px;
+  height: 40px;
+  /* padding: 1rem; */
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  transition: all ease-in-out 100ms;
+}
+
+.add-task:hover {
+  transform: scale(0.95);
+}
