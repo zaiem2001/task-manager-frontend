@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { DUMMY_LISTS } from 'src/app/constants/constants';
 import { List } from 'src/app/models/list.model';
+import { ListService } from 'src/app/services/List.service';
 
 @Component({
   selector: 'app-list-item',
@@ -9,17 +10,39 @@ import { List } from 'src/app/models/list.model';
     <div
       *ngFor="let listItem of listItems"
       [ngClass]="{
-        'is-active': isActive,
+        'is-active': listItem._id === listId,
         'list-item': true
       }"
+      (click)="onListClick(listItem._id)"
     >
       <span>{{ listItem.title }}</span>
     </div>
   `,
   styleUrls: ['./list-item.component.css'],
 })
-export class ListItemComponent {
-  listItems: List[] = DUMMY_LISTS;
+export class ListItemComponent implements OnInit {
+  listId: undefined | null | string = null;
+  listItems: List[] = [];
 
-  @Input('is-active') isActive: boolean = false;
+  constructor(
+    private listService: ListService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.listService.getUsersList().subscribe((response) => {
+      const { list } = response;
+      this.listItems = list || [];
+    });
+
+    this.route.params.subscribe((params) => {
+      const { listId } = params;
+      this.listId = listId;
+    });
+  }
+
+  onListClick(_id: string) {
+    this.router.navigate([`/${_id}`]);
+  }
 }
