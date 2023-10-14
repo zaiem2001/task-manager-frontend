@@ -53,3 +53,5 @@ export const DUMMY_TASKS: Task[] = [
 export const BASE_URL = 'http://localhost:4000/api';
 
 export const DUMMY_TOKEN = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTI5NmRhNTBmM2I1MGUzODdkMjQyNjgiLCJpYXQiOjE2OTcyMzY0MTZ9.84KES009opvBxX1q35XTaxSYFg8IrTj7CGxAMfkJoQ4`;
+
+export const DUMMY_HEADER = { authorization: 'Bearer ' + DUMMY_TOKEN };

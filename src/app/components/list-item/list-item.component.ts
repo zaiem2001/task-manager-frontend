@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 import { List } from 'src/app/models/list.model';
-import { ListService } from 'src/app/services/List.service';
+import { ListService } from 'src/app/services/list.service';
 
 @Component({
   selector: 'app-list-item',
@@ -20,9 +27,11 @@ import { ListService } from 'src/app/services/List.service';
   `,
   styleUrls: ['./list-item.component.css'],
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent implements OnInit, OnChanges {
   listId: undefined | null | string = null;
   listItems: List[] = [];
+  lsSubject = new Subject<List[]>();
+  @Input('createdList') createdList: List | null = null;
 
   constructor(
     private listService: ListService,
@@ -30,10 +39,21 @@ export class ListItemComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const { createdList } = changes;
+    if (createdList.currentValue) {
+      this.lsSubject.next([...this.listItems, createdList.currentValue]);
+    }
+  }
+
   ngOnInit(): void {
+    this.lsSubject.subscribe((response) => {
+      this.listItems = response || [];
+    });
+
     this.listService.getUsersList().subscribe((response) => {
       const { list } = response;
-      this.listItems = list || [];
+      this.lsSubject.next(list || []);
     });
 
     this.route.params.subscribe((params) => {

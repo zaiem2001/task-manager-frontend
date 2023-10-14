@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BASE_URL, DUMMY_TOKEN } from '../constants/constants';
+import { BASE_URL, DUMMY_HEADER } from '../constants/constants';
 import { List } from '../models/list.model';
 
 const LIST_URLS = {
@@ -17,9 +17,17 @@ export class ListService {
 
   getUsersList() {
     return this.http.get<{ list: List[] }>(LIST_URLS.get, {
-      headers: {
-        authorization: 'Bearer ' + DUMMY_TOKEN,
-      },
+      headers: DUMMY_HEADER,
     });
+  }
+
+  createNewList(title: string) {
+    return this.http.post<{ list: List }>(
+      LIST_URLS.create,
+      { title },
+      {
+        headers: DUMMY_HEADER,
+      }
+    );
   }
 }

@@ -1,0 +1,57 @@
+.new-list-container {
+  background-color: #f1f2eb;
+  width: 500px;
+}
+
+.new-list-container h3 {
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 24px;
+  padding-bottom: 0;
+}
+
+.form-container {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 0.5rem 1.2rem;
+  border: none;
+}
+
+.form-container input:focus {
+  outline: none;
+  border: none;
+}
+
+.mat-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.mat-actions button {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.create-list-btn {
+  color: white;
+  border: none;
+  background-color: var(--primary-color);
+}
+
+.cancel-btn {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}

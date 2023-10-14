@@ -4,12 +4,18 @@
       <div class="top-part">
         <h3>Lists</h3>
         <div class="list-items">
-          <app-list-item></app-list-item>
+          <app-list-item [createdList]="createdList"></app-list-item>
         </div>
       </div>
 
       <div class="bottom-part">
-        <button class="new-list-btn">+ New List</button>
+        <button
+          class="new-list-btn"
+          mat-raised-button
+          (click)="openDialog('list')"
+        >
+          + New List
+        </button>
       </div>
     </div>
 
@@ -24,9 +30,11 @@
       </div>
 
       <div class="task-wrapper">
-        <app-task-item></app-task-item>
+        <app-task-item [createdTask]="createdTask"></app-task-item>
       </div>
-      <button class="add-task">+</button>
+      <button class="add-task" mat-raised-button (click)="openDialog('task')">
+        +
+      </button>
     </div>
   </div>
 </div>
