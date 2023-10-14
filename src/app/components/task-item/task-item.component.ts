@@ -5,11 +5,13 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, map } from 'rxjs';
 
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-task-item',
@@ -28,7 +30,7 @@ import { TaskService } from 'src/app/services/task.service';
         }}</span>
 
         <div class="task-actions">
-          <button mat-raised-button>
+          <button mat-raised-button (click)="onClick(taskItem)">
             <mat-icon aria-label="edit icon" class="edit-icon">edit</mat-icon>
           </button>
           <button (click)="onTaskDelete(taskItem._id)" type="button">
@@ -49,7 +51,8 @@ export class TaskItemComponent implements OnInit, OnChanges {
 
   constructor(
     private route: ActivatedRoute,
-    private taskService: TaskService
+    private taskService: TaskService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +79,44 @@ export class TaskItemComponent implements OnInit, OnChanges {
           const { task } = response;
           this.taskSubject.next(task);
         });
+      }
+    });
+  }
+
+  onClick(taskData: Task) {
+    const { _id, description, completed } = taskData;
+
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Update Task',
+        type: 'edit',
+        payload: description,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data?.trim()) {
+        this.taskService
+          .updateTask({
+            _id,
+            description: data,
+            completed,
+          })
+          .pipe(
+            map((response) => {
+              const { task } = response;
+              return this.taskItems.map((item) => {
+                if (item._id === task._id) {
+                  return { ...item, description: task.description };
+                }
+
+                return item;
+              });
+            })
+          )
+          .subscribe((response) => {
+            this.taskItems = response;
+          });
       }
     });
   }

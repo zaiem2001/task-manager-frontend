@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { List } from 'src/app/models/list.model';
@@ -34,10 +35,10 @@ export class HomepageComponent implements OnInit {
 
   openDialog(type: string) {
     const dialogData = this.getDialogData(type);
-
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         ...dialogData,
+        payload: '',
       },
     });
 
@@ -81,4 +82,22 @@ export class HomepageComponent implements OnInit {
       title: 'Create new Task',
     };
   }
+
+  // TODO
+  // updateListDialog(type: string) {
+  //   if (type === 'edit') {
+  //     this.dialog.open(DialogComponent, {
+  //       data: {
+  //         title: 'Update List',
+  //         payload: '',
+  //       },
+  //     });
+  //   } else {
+  //     this.listService.deleteList(this.listId).pipe(
+  //       map((response) => {
+  //         const { list } = response;
+  //       })
+  //     );
+  //   }
+  // }
 }

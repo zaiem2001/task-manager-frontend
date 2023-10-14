@@ -7,6 +7,7 @@ import { List } from '../models/list.model';
 const LIST_URLS = {
   get: `${BASE_URL}/list/all`,
   create: `${BASE_URL}/list/create`,
+  delete: `${BASE_URL}/list`,
 };
 
 @Injectable({
@@ -29,5 +30,9 @@ export class ListService {
         headers: DUMMY_HEADER,
       }
     );
+  }
+
+  deleteList(listId: string) {
+    return this.http.delete<{ list: List }>(`${LIST_URLS.delete}/${listId}`);
   }
 }

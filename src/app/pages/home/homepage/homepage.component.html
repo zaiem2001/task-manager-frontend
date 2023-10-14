@@ -22,11 +22,18 @@
     <div class="tasks-container">
       <div class="task-header">
         <h3>Tasks</h3>
-        <span>
+        <span
+          [matTooltip]="listId ? '' : 'Please select a list.'"
+          [matMenuTriggerFor]="menu"
+        >
           <mat-icon aria-label="settings icon" class="settings-icon"
             >settings</mat-icon
           >
         </span>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Edit List</button>
+          <button mat-menu-item>Delete List</button>
+        </mat-menu>
       </div>
 
       <div class="task-wrapper">
