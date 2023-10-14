@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="form-wrapper">
+    <div class="form-container">
+      <h3>{{ getAuthData().title }}</h3>
+
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <input
+          type="email"
+          placeholder="Email"
+          ngModel
+          name="email"
+          email
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          ngModel
+          name="password"
+          required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        />
+
+        <button type="submit" [disabled]="!f.valid">
+          {{ getAuthData().title }}
+        </button>
+      </form>
+    </div>
+
+    <div class="redirect">
+      {{ getAuthData().text }}
+      <span
+        routerLink="/auth"
+        [queryParams]="{ type: authMode === 'login' ? 'signup' : 'login' }"
+        >{{ getAuthData().redirect }}</span
+      >
+      Now!
+    </div>
+  </div>
+</div>

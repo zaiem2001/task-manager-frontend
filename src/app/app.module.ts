@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,10 +17,12 @@ import { HomepageComponent } from './pages/home/homepage/homepage.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthComponent,
     HomepageComponent,
     ListItemComponent,
     TaskItemComponent,
@@ -38,6 +41,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatInputModule,
     MatTooltipModule,
     // MatButtonModule,
+    MatSnackBarModule,
     MatMenuModule,
   ],
   bootstrap: [AppComponent],
