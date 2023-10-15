@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
 
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { List } from 'src/app/models/list.model';
 import { Task } from 'src/app/models/task.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ListService } from 'src/app/services/list.service';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -24,7 +24,8 @@ export class HomepageComponent implements OnInit {
     private listService: ListService,
     private router: Router,
     private route: ActivatedRoute,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +82,10 @@ export class HomepageComponent implements OnInit {
     return {
       title: 'Create new Task',
     };
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   // TODO

@@ -6,6 +6,8 @@ import { catchError, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { saveToLocalStorage } from 'src/app/utils/auth.helper';
+import { LOCAL_STORAGE_KEYS } from 'src/app/constants/constants';
 
 const AUTH_TYPES = ['login', 'signup'];
 
@@ -16,7 +18,6 @@ const AUTH_TYPES = ['login', 'signup'];
 })
 export class AuthComponent implements OnInit {
   authMode = '';
-  // error: string | null = null;
 
   constructor(
     private router: Router,
@@ -77,7 +78,9 @@ export class AuthComponent implements OnInit {
       .login(userData)
       .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)))
       .subscribe((response) => {
-        console.log(response);
+        const { token } = response;
+        saveToLocalStorage({ key: LOCAL_STORAGE_KEYS.TOKEN, value: token });
+        this.router.navigate(['/']);
       });
   }
 

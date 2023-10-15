@@ -33,13 +33,19 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item>Edit List</button>
           <button mat-menu-item>Delete List</button>
+          <button mat-menu-item (click)="onLogout()">Logout</button>
         </mat-menu>
       </div>
 
       <div class="task-wrapper">
         <app-task-item [createdTask]="createdTask"></app-task-item>
       </div>
-      <button class="add-task" mat-raised-button (click)="openDialog('task')">
+      <button
+        class="add-task"
+        mat-raised-button
+        (click)="openDialog('task')"
+        [disabled]="!listId"
+      >
         +
       </button>
     </div>

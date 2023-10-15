@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,11 +13,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './pages/home/homepage/homepage.component';
+import { HomepageComponent } from './pages/home/homepage.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,10 @@ import { AuthComponent } from './pages/auth/auth.component';
     // MatButtonModule,
     MatSnackBarModule,
     MatMenuModule,
+  ],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -143,3 +143,8 @@
 .add-task:hover {
   transform: scale(0.95);
 }
+
+.add-task:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
