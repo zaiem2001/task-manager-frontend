@@ -57,4 +57,5 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const ERROR_MESSAGES = {
   JWT_EXPIRED: 'jwt expired',
+  INVALID_LIST_ID: 'Invalid list ID.',
 };

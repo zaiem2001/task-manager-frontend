@@ -39,9 +39,16 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    if (error && error.error.message === ERROR_MESSAGES.JWT_EXPIRED) {
-      this.authService.logout();
+    switch (error.error.message) {
+      case ERROR_MESSAGES.JWT_EXPIRED:
+        this.authService.logout();
+        break;
+
+      case ERROR_MESSAGES.INVALID_LIST_ID:
+        this.router.navigate(['/']);
+        break;
     }
+
     return throwError(() => error);
   };
 
